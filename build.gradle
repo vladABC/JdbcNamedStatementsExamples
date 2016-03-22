@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = "Application"
+
+jar {
+    baseName = 'JdbcNamedStatementsExamples'
+    version '1.0.0'
+
+    manifest {
+        attributes "Implementation-Title": "JdbcNamedStatementsExamples"
+        attributes "Implementation-ProcessVersion": version
+    }
+
+    from("${rootProject.projectDir}") {
+        include "UNLICENSE"
+        into "META-INF"
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile("abc.java.sql:JdbcNamedStatements:1.0.0")
+    compile("org.postgresql:postgresql:9.4.1207.jre7")
+    compile("com.oracle:ojdbc6:11.2.0.4")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}
